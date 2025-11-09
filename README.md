@@ -1,7 +1,8 @@
 Webpage.py is a basic FastAPI example. 
 
 Prerequesites:
-```pip install "fastapi[all]" uvicorn```
+```pip install requirements.txt```
 
 To run:
-```uvicorn main:app --reload```
+```uvicorn app.main:app ```
+Uvicorn will tell you what address the site is running on

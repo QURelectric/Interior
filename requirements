@@ -1,3 +1,4 @@
 .txt
 fastapi[all]
 uvicorn
+jinja2
