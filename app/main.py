@@ -1,8 +1,8 @@
-from fastapi import FastAPI
-# Import the FastAPI class from the fastapi module
+import asyncio
+import sys
+from fastapi import FastAPI, WebSocket, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from fastapi.requests import Request
 # Import necessary modules for HTML responses and templating
 
 app = FastAPI()
@@ -10,6 +10,8 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="app/templates")
 # Set up Jinja2 templates, specifying the directory where HTML templates are stored
+
+active_connections = []
 
 # Most Basic Example
 @app.get("/", response_class=HTMLResponse)
@@ -20,5 +22,15 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "message": "Hello World"})
     # Return a simple JSON response using the template "index.html" with a message
 
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
 
+    # Send something every second (example)
+    import asyncio
+    counter = 0
+    while True:
+        await websocket.send_text(f"Update #{counter}")
+        counter += 1
+        await asyncio.sleep(1)
 
