@@ -1,7 +1,7 @@
 Webpage.py is a basic FastAPI example. 
 
 Prerequesites:
-```pip install requirements.txt```
+```pip install -r requirements.txt```
 
 To run:
 ```uvicorn app.main:app ```
